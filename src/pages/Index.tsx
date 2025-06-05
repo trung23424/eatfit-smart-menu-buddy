@@ -7,23 +7,26 @@ import HealthTracker from "@/components/HealthTracker";
 import AIAssistant from "@/components/AIAssistant";
 import CommunitySection from "@/components/CommunitySection";
 import BottomNavigation from "@/components/BottomNavigation";
+import MobileFrame from "@/components/MobileFrame";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gray-50 pb-20">
-      <Header />
-      
-      <main className="animate-fade-in">
-        <WelcomeSection />
-        <GoalSelector />
-        <MealSuggestions />
-        <HealthTracker />
-        <AIAssistant />
-        <CommunitySection />
-      </main>
-      
-      <BottomNavigation />
-    </div>
+    <MobileFrame>
+      <div className="min-h-screen bg-gray-50 pb-20 relative">
+        <Header />
+        
+        <main className="animate-fade-in">
+          <WelcomeSection />
+          <GoalSelector />
+          <MealSuggestions />
+          <HealthTracker />
+          <AIAssistant />
+          <CommunitySection />
+        </main>
+        
+        <BottomNavigation />
+      </div>
+    </MobileFrame>
   );
 };
 
