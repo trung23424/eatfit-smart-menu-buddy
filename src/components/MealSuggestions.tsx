@@ -11,7 +11,8 @@ const meals = [
     calories: '320',
     image: 'https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=300&h=200&fit=crop',
     type: 'Bữa sáng',
-    difficulty: 'Dễ'
+    difficulty: 'Dễ',
+    ingredients: ['Quinoa', 'Bơ', 'Cà chua']
   },
   {
     id: 2,
@@ -20,7 +21,8 @@ const meals = [
     calories: '450',
     image: 'https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=300&h=200&fit=crop',
     type: 'Bữa trưa',
-    difficulty: 'Trung bình'
+    difficulty: 'Trung bình',
+    ingredients: ['Ức gà', 'Cơm lứt', 'Rau củ']
   },
   {
     id: 3,
@@ -29,24 +31,25 @@ const meals = [
     calories: '250',
     image: 'https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=300&h=200&fit=crop',
     type: 'Bữa tối',
-    difficulty: 'Dễ'
+    difficulty: 'Dễ',
+    ingredients: ['Cà rót', 'Bông cải', 'Nấm']
   }
 ];
 
 const MealSuggestions = () => {
   return (
-    <div className="p-4 space-y-4">
+    <div className="p-3 space-y-3">
       <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-gray-800">🍱 Gợi ý bữa ăn hôm nay</h3>
-        <span className="text-sm text-eatfit-green font-medium">Xem tất cả</span>
+        <h3 className="text-base font-semibold text-gray-800">🍱 Gợi ý bữa ăn hôm nay</h3>
+        <span className="text-xs text-eatfit-green font-medium">Xem tất cả</span>
       </div>
       
-      <div className="space-y-3">
+      <div className="space-y-2">
         {meals.map((meal) => (
           <Card key={meal.id} className="overflow-hidden card-hover cursor-pointer">
             <CardContent className="p-0">
               <div className="flex">
-                <div className="w-20 h-20 bg-gray-200 relative overflow-hidden">
+                <div className="w-16 h-16 bg-gray-200 relative overflow-hidden">
                   <img 
                     src={meal.image} 
                     alt={meal.name}
@@ -59,13 +62,13 @@ const MealSuggestions = () => {
                   </div>
                 </div>
                 
-                <div className="flex-1 p-3 space-y-2">
+                <div className="flex-1 p-2 space-y-1">
                   <div>
-                    <h4 className="font-medium text-sm">{meal.name}</h4>
-                    <p className="text-xs text-gray-500">{meal.difficulty}</p>
+                    <h4 className="font-medium text-xs">{meal.name}</h4>
+                    <p className="text-xs text-gray-500">{meal.ingredients.join(', ')}</p>
                   </div>
                   
-                  <div className="flex items-center gap-3 text-xs text-gray-500">
+                  <div className="flex items-center gap-2 text-xs text-gray-500">
                     <div className="flex items-center gap-1">
                       <Clock className="h-3 w-3" />
                       <span>{meal.time}</span>

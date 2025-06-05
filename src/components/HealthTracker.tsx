@@ -48,29 +48,29 @@ const healthMetrics = [
 
 const HealthTracker = () => {
   return (
-    <div className="p-4 space-y-4">
-      <h3 className="text-lg font-semibold text-gray-800">📊 Theo dõi sức khỏe</h3>
+    <div className="p-3 space-y-3">
+      <h3 className="text-base font-semibold text-gray-800">💪 Theo dõi sức khỏe</h3>
       
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 gap-2">
         {healthMetrics.map((metric) => {
           const Icon = metric.icon;
           
           return (
             <Card key={metric.id} className="card-hover">
-              <CardContent className="p-4 space-y-3">
+              <CardContent className="p-3 space-y-2">
                 <div className="flex items-center justify-between">
-                  <Icon className={`h-5 w-5 ${metric.color}`} />
+                  <Icon className={`h-4 w-4 ${metric.color}`} />
                   <span className="text-xs text-gray-500">{metric.progress}%</span>
                 </div>
                 
                 <div>
-                  <h4 className="text-sm font-medium">{metric.label}</h4>
+                  <h4 className="text-xs font-medium">{metric.label}</h4>
                   <p className="text-xs text-gray-500">
                     {metric.value}/{metric.target} {metric.unit}
                   </p>
                 </div>
                 
-                <Progress value={metric.progress} className="h-2" />
+                <Progress value={metric.progress} className="h-1.5" />
               </CardContent>
             </Card>
           );

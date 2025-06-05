@@ -42,9 +42,9 @@ const GoalSelector = () => {
   const [selectedGoal, setSelectedGoal] = useState('weight-loss');
 
   return (
-    <div className="p-4 space-y-4">
-      <h3 className="text-lg font-semibold text-gray-800">🎯 Chọn mục tiêu của bạn</h3>
-      <div className="grid grid-cols-2 gap-3">
+    <div className="p-3 space-y-3">
+      <h3 className="text-base font-semibold text-gray-800">🎯 Chọn mục tiêu của bạn</h3>
+      <div className="grid grid-cols-2 gap-2">
         {goals.map((goal) => {
           const Icon = goal.icon;
           const isSelected = selectedGoal === goal.id;
@@ -57,13 +57,13 @@ const GoalSelector = () => {
               }`}
               onClick={() => setSelectedGoal(goal.id)}
             >
-              <CardContent className="p-4 text-center space-y-2">
-                <div className={`w-12 h-12 rounded-full mx-auto flex items-center justify-center ${
+              <CardContent className="p-3 text-center space-y-2">
+                <div className={`w-10 h-10 rounded-full mx-auto flex items-center justify-center ${
                   isSelected ? goal.selected : goal.color
                 } transition-colors`}>
-                  <Icon className="h-6 w-6" />
+                  <Icon className="h-5 w-5" />
                 </div>
-                <h4 className="font-medium text-sm">{goal.title}</h4>
+                <h4 className="font-medium text-xs">{goal.title}</h4>
                 <p className="text-xs text-gray-500 leading-tight">{goal.description}</p>
               </CardContent>
             </Card>

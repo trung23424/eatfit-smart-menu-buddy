@@ -8,6 +8,10 @@ import AIAssistant from "@/components/AIAssistant";
 import CommunitySection from "@/components/CommunitySection";
 import BottomNavigation from "@/components/BottomNavigation";
 import MobileFrame from "@/components/MobileFrame";
+import NutritionTracker from "@/components/NutritionTracker";
+import PersonalizedNotifications from "@/components/PersonalizedNotifications";
+import ProgressReports from "@/components/ProgressReports";
+import PremiumFeatures from "@/components/PremiumFeatures";
 
 const Index = () => {
   return (
@@ -19,9 +23,13 @@ const Index = () => {
           <WelcomeSection />
           <GoalSelector />
           <MealSuggestions />
+          <NutritionTracker />
           <HealthTracker />
+          <PersonalizedNotifications />
           <AIAssistant />
           <CommunitySection />
+          <ProgressReports />
+          <PremiumFeatures />
         </main>
         
         <BottomNavigation />

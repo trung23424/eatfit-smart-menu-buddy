@@ -17,7 +17,7 @@ const MobileFrame = ({ children }: MobileFrameProps) => {
             <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-36 h-6 bg-black rounded-b-2xl z-50"></div>
             
             {/* Screen Content */}
-            <div className="w-full h-full overflow-hidden">
+            <div className="w-full h-full overflow-y-auto pt-6 pb-2">
               {children}
             </div>
             
