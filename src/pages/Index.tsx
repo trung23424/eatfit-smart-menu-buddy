@@ -56,7 +56,7 @@ const Index = () => {
       <div className="min-h-screen bg-gray-50 relative">
         <Header />
         
-        <div className="pb-16">
+        <div className="pb-20">
           {renderContent()}
         </div>
         
