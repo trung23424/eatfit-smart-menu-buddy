@@ -10,11 +10,14 @@ const navItems = [
   { id: 'profile', icon: User, label: 'Cá nhân' }
 ];
 
-const BottomNavigation = () => {
-  const [activeTab, setActiveTab] = useState('home');
+interface BottomNavigationProps {
+  activeTab: string;
+  onTabChange: (tab: string) => void;
+}
 
+const BottomNavigation = ({ activeTab, onTabChange }: BottomNavigationProps) => {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2">
+    <nav className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-2 py-1 mx-2 mb-2 rounded-t-lg shadow-lg">
       <div className="flex items-center justify-around">
         {navItems.map((item) => {
           const Icon = item.icon;
@@ -23,14 +26,14 @@ const BottomNavigation = () => {
           return (
             <button
               key={item.id}
-              onClick={() => setActiveTab(item.id)}
-              className={`flex flex-col items-center gap-1 p-2 transition-colors ${
+              onClick={() => onTabChange(item.id)}
+              className={`flex flex-col items-center gap-0.5 p-2 transition-colors relative ${
                 isActive 
                   ? 'text-eatfit-green' 
                   : 'text-gray-400 hover:text-gray-600'
               }`}
             >
-              <Icon className={`h-5 w-5 ${isActive ? 'text-eatfit-green' : ''}`} />
+              <Icon className={`h-4 w-4 ${isActive ? 'text-eatfit-green' : ''}`} />
               <span className="text-xs font-medium">{item.label}</span>
               {isActive && (
                 <div className="w-4 h-0.5 bg-eatfit-green rounded-full absolute bottom-0" />
