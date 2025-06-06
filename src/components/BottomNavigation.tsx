@@ -16,8 +16,8 @@ interface BottomNavigationProps {
 
 const BottomNavigation = ({ activeTab, onTabChange }: BottomNavigationProps) => {
   return (
-    <nav className="bg-white border-t border-gray-200 px-2 py-1 rounded-lg shadow-lg">
-      <div className="flex items-center justify-around">
+    <nav className="w-full bg-white border-t border-gray-200 shadow-lg">
+      <div className="flex items-center justify-around py-2">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = activeTab === item.id;
@@ -26,16 +26,16 @@ const BottomNavigation = ({ activeTab, onTabChange }: BottomNavigationProps) => 
             <button
               key={item.id}
               onClick={() => onTabChange(item.id)}
-              className={`flex flex-col items-center gap-0.5 p-2 transition-colors relative ${
+              className={`flex flex-col items-center gap-1 p-2 transition-colors flex-1 ${
                 isActive 
                   ? 'text-eatfit-green' 
                   : 'text-gray-400 hover:text-gray-600'
               }`}
             >
-              <Icon className={`h-4 w-4 ${isActive ? 'text-eatfit-green' : ''}`} />
+              <Icon className={`h-5 w-5 ${isActive ? 'text-eatfit-green' : ''}`} />
               <span className="text-xs font-medium">{item.label}</span>
               {isActive && (
-                <div className="w-4 h-0.5 bg-eatfit-green rounded-full absolute bottom-0" />
+                <div className="w-6 h-0.5 bg-eatfit-green rounded-full" />
               )}
             </button>
           );

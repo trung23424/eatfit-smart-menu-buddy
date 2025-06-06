@@ -13,6 +13,9 @@ import NutritionTracker from "@/components/NutritionTracker";
 import PersonalizedNotifications from "@/components/PersonalizedNotifications";
 import ProgressReports from "@/components/ProgressReports";
 import PremiumFeatures from "@/components/PremiumFeatures";
+import DietarySurvey from "@/components/DietarySurvey";
+import PersonalizedMealPlan from "@/components/PersonalizedMealPlan";
+import DetailedHealthTracking from "@/components/DetailedHealthTracking";
 
 // Import các trang mới
 import SearchPage from "./SearchPage";
@@ -37,9 +40,12 @@ const Index = () => {
         return (
           <main className="animate-fade-in">
             <WelcomeSection />
+            <DietarySurvey />
+            <PersonalizedMealPlan />
             <GoalSelector />
             <MealSuggestions />
             <NutritionTracker />
+            <DetailedHealthTracking />
             <HealthTracker />
             <PersonalizedNotifications />
             <AIAssistant />
