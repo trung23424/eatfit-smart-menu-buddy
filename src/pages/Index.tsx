@@ -52,15 +52,16 @@ const Index = () => {
   };
 
   return (
-    <MobileFrame>
+    <MobileFrame 
+      bottomNavigation={
+        <BottomNavigation activeTab={activeTab} onTabChange={setActiveTab} />
+      }
+    >
       <div className="min-h-screen bg-gray-50 relative">
         <Header />
-        
-        <div className="pb-20">
+        <div>
           {renderContent()}
         </div>
-        
-        <BottomNavigation activeTab={activeTab} onTabChange={setActiveTab} />
       </div>
     </MobileFrame>
   );
