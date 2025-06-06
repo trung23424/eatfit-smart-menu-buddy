@@ -117,7 +117,10 @@ const CommunityPage = () => {
         image: "📝",
         likes: 0,
         comments: 0,
-        isLiked: false
+        isLiked: false,
+        challenge: undefined,
+        recipe: undefined,
+        mealPrep: undefined
       };
       setPosts(prev => [post, ...prev]);
       setNewPost("");
