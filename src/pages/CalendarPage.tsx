@@ -1,7 +1,8 @@
 
-import { Calendar, Plus, Clock, CheckCircle } from "lucide-react";
+import { Calendar, Plus, Clock, CheckCircle, Edit, Trash2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 const todayMeals = [
   {
@@ -41,6 +42,37 @@ const weekDays = [
 ];
 
 const CalendarPage = () => {
+  const [meals, setMeals] = useState(todayMeals);
+  const [selectedDay, setSelectedDay] = useState("28");
+
+  const addMeal = () => {
+    console.log('Adding new meal');
+    alert('Thêm bữa ăn mới\n\nTính năng này sẽ cho phép bạn:\n- Chọn loại bữa ăn\n- Thêm món ăn từ thư viện\n- Đặt thời gian\n- Tính toán calo');
+  };
+
+  const markAsCompleted = (mealId: number) => {
+    setMeals(prev => prev.map(meal => 
+      meal.id === mealId ? { ...meal, status: 'completed' } : meal
+    ));
+    console.log('Meal marked as completed:', mealId);
+  };
+
+  const editMeal = (meal: any) => {
+    console.log('Editing meal:', meal);
+    alert(`Chỉnh sửa bữa ăn: ${meal.dish}\n\nBạn có thể:\n- Thay đổi món ăn\n- Điều chỉnh thời gian\n- Cập nhật lượng calo`);
+  };
+
+  const deleteMeal = (mealId: number) => {
+    setMeals(prev => prev.filter(meal => meal.id !== mealId));
+    console.log('Meal deleted:', mealId);
+  };
+
+  const selectDay = (day: string) => {
+    setSelectedDay(day);
+    console.log('Day selected:', day);
+    // Load meals for selected day
+  };
+
   return (
     <div className="p-3 space-y-4">
       {/* Header */}
@@ -49,7 +81,7 @@ const CalendarPage = () => {
           <h2 className="text-lg font-bold text-gray-800">Lịch trình ăn uống</h2>
           <p className="text-sm text-gray-600">Tháng 5, 2024</p>
         </div>
-        <Button size="sm" className="bg-eatfit-green">
+        <Button size="sm" className="bg-eatfit-green" onClick={addMeal}>
           <Plus className="h-4 w-4 mr-1" />
           Thêm
         </Button>
@@ -58,17 +90,18 @@ const CalendarPage = () => {
       {/* Week Calendar */}
       <div className="flex justify-between space-x-1">
         {weekDays.map((day, index) => (
-          <div
+          <button
             key={index}
-            className={`flex flex-col items-center p-2 rounded-lg ${
-              day.isToday 
+            onClick={() => selectDay(day.date)}
+            className={`flex flex-col items-center p-2 rounded-lg transition-colors ${
+              day.isToday || selectedDay === day.date
                 ? 'bg-eatfit-green text-white' 
-                : 'bg-gray-50 text-gray-600'
+                : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
             }`}
           >
             <span className="text-xs font-medium">{day.day}</span>
             <span className="text-sm font-bold mt-1">{day.date}</span>
-          </div>
+          </button>
         ))}
       </div>
 
@@ -86,11 +119,16 @@ const CalendarPage = () => {
             </div>
             <div>
               <p className="text-white/80">Bữa ăn hoàn thành</p>
-              <p className="font-bold">1 / 3</p>
+              <p className="font-bold">
+                {meals.filter(m => m.status === 'completed').length} / {meals.length}
+              </p>
             </div>
           </div>
           <div className="mt-3 bg-white/20 rounded-full h-2">
-            <div className="bg-white rounded-full h-2 w-2/3"></div>
+            <div 
+              className="bg-white rounded-full h-2 transition-all"
+              style={{ width: `${(1150/1800) * 100}%` }}
+            ></div>
           </div>
         </CardContent>
       </Card>
@@ -99,25 +137,28 @@ const CalendarPage = () => {
       <div>
         <h3 className="text-sm font-semibold text-gray-800 mb-2">🍽️ Thực đơn hôm nay</h3>
         <div className="space-y-2">
-          {todayMeals.map((meal) => (
+          {meals.map((meal) => (
             <Card key={meal.id} className="card-hover">
               <CardContent className="p-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
-                    <div className={`p-2 rounded-lg ${
-                      meal.status === 'completed' 
-                        ? 'bg-green-100' 
-                        : meal.status === 'upcoming'
-                        ? 'bg-orange-100'
-                        : 'bg-gray-100'
-                    }`}>
+                    <button
+                      onClick={() => markAsCompleted(meal.id)}
+                      className={`p-2 rounded-lg transition-colors ${
+                        meal.status === 'completed' 
+                          ? 'bg-green-100' 
+                          : meal.status === 'upcoming'
+                          ? 'bg-orange-100 hover:bg-green-100'
+                          : 'bg-gray-100 hover:bg-green-100'
+                      }`}
+                    >
                       {meal.status === 'completed' ? (
                         <CheckCircle className="h-4 w-4 text-green-600" />
                       ) : (
                         <Clock className="h-4 w-4 text-gray-600" />
                       )}
-                    </div>
-                    <div>
+                    </button>
+                    <div className="flex-1">
                       <div className="flex items-center space-x-2">
                         <span className="text-xs font-medium text-gray-500">{meal.time}</span>
                         <span className="text-xs bg-gray-100 px-2 py-0.5 rounded-full">{meal.meal}</span>
@@ -125,6 +166,24 @@ const CalendarPage = () => {
                       <h4 className="text-sm font-medium mt-1">{meal.dish}</h4>
                       <p className="text-xs text-gray-500">{meal.calories} calo</p>
                     </div>
+                  </div>
+                  <div className="flex gap-1">
+                    <Button 
+                      size="sm" 
+                      variant="ghost" 
+                      className="h-8 w-8 p-0"
+                      onClick={() => editMeal(meal)}
+                    >
+                      <Edit className="h-3 w-3" />
+                    </Button>
+                    <Button 
+                      size="sm" 
+                      variant="ghost" 
+                      className="h-8 w-8 p-0 text-red-500 hover:text-red-700"
+                      onClick={() => deleteMeal(meal.id)}
+                    >
+                      <Trash2 className="h-3 w-3" />
+                    </Button>
                   </div>
                 </div>
               </CardContent>

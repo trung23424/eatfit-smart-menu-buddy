@@ -50,13 +50,19 @@ const surveyQuestions = [
   }
 ];
 
-const DietarySurvey = () => {
+interface DietarySurveyProps {
+  onComplete?: (answers: Record<string, string>) => void;
+}
+
+const DietarySurvey = ({ onComplete }: DietarySurveyProps) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [isCompleted, setIsCompleted] = useState(false);
 
   const handleAnswer = (questionId: string, answerId: string) => {
-    setAnswers(prev => ({ ...prev, [questionId]: answerId }));
+    const newAnswers = { ...answers, [questionId]: answerId };
+    setAnswers(newAnswers);
+    console.log('Survey answer:', { questionId, answerId, allAnswers: newAnswers });
   };
 
   const nextQuestion = () => {
@@ -64,6 +70,8 @@ const DietarySurvey = () => {
       setCurrentQuestion(prev => prev + 1);
     } else {
       setIsCompleted(true);
+      onComplete?.(answers);
+      console.log('Survey completed with answers:', answers);
     }
   };
 
@@ -71,6 +79,7 @@ const DietarySurvey = () => {
     setCurrentQuestion(0);
     setAnswers({});
     setIsCompleted(false);
+    console.log('Survey reset');
   };
 
   if (isCompleted) {
