@@ -1,9 +1,9 @@
-
 import { Clock, Flame, Star, ChefHat, Heart } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import MealDetailModal from "./MealDetailModal";
 
 const personalizedMeals = [
   {
@@ -50,6 +50,8 @@ const personalizedMeals = [
 const PersonalizedMealPlan = () => {
   const [meals, setMeals] = useState(personalizedMeals);
   const [showCustomization, setShowCustomization] = useState(false);
+  const [selectedMeal, setSelectedMeal] = useState<any>(null);
+  const [isMealModalOpen, setIsMealModalOpen] = useState(false);
 
   const toggleFavorite = (mealId: number) => {
     setMeals(prev => prev.map(meal => 
@@ -60,7 +62,13 @@ const PersonalizedMealPlan = () => {
 
   const viewMealDetails = (meal: any) => {
     console.log('Viewing meal details:', meal);
-    alert(`Chi tiết món ăn: ${meal.name}\n\nMô tả: ${meal.description}\nCalo: ${meal.calories}\nThời gian chuẩn bị: ${meal.prepTime}\nDinh dưỡng: ${meal.nutrients.protein} protein, ${meal.nutrients.carbs} carbs, ${meal.nutrients.fat} fat`);
+    setSelectedMeal(meal);
+    setIsMealModalOpen(true);
+  };
+
+  const closeMealModal = () => {
+    setIsMealModalOpen(false);
+    setSelectedMeal(null);
   };
 
   const handleCustomization = () => {
@@ -199,6 +207,14 @@ const PersonalizedMealPlan = () => {
       <Button className="w-full" size="sm" onClick={viewWeeklyPlan}>
         Xem thực đơn tuần này
       </Button>
+
+      {/* Meal Detail Modal */}
+      <MealDetailModal
+        meal={selectedMeal}
+        isOpen={isMealModalOpen}
+        onClose={closeMealModal}
+        onToggleFavorite={toggleFavorite}
+      />
     </div>
   );
 };

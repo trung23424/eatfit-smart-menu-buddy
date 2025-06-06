@@ -1,7 +1,8 @@
-
 import { Clock, Flame, Users } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useState } from "react";
+import RecipeDetailModal from "./RecipeDetailModal";
 
 const meals = [
   {
@@ -37,6 +38,29 @@ const meals = [
 ];
 
 const MealSuggestions = () => {
+  const [selectedRecipe, setSelectedRecipe] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const viewRecipe = (meal: any) => {
+    // Convert meal data to recipe format for the modal
+    const recipeData = {
+      id: meal.id,
+      name: meal.name,
+      calories: parseInt(meal.calories),
+      time: meal.time,
+      rating: 4.5, // Default rating
+      image: "🍽️" // Default emoji for suggestions
+    };
+    
+    setSelectedRecipe(recipeData);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedRecipe(null);
+  };
+
   return (
     <div className="p-3 space-y-3">
       <div className="flex items-center justify-between">
@@ -46,7 +70,7 @@ const MealSuggestions = () => {
       
       <div className="space-y-2">
         {meals.map((meal) => (
-          <Card key={meal.id} className="overflow-hidden card-hover cursor-pointer">
+          <Card key={meal.id} className="overflow-hidden card-hover cursor-pointer" onClick={() => viewRecipe(meal)}>
             <CardContent className="p-0">
               <div className="flex">
                 <div className="w-16 h-16 bg-gray-200 relative overflow-hidden">
@@ -84,6 +108,13 @@ const MealSuggestions = () => {
           </Card>
         ))}
       </div>
+
+      {/* Recipe Detail Modal */}
+      <RecipeDetailModal
+        recipe={selectedRecipe}
+        isOpen={isModalOpen}
+        onClose={closeModal}
+      />
     </div>
   );
 };

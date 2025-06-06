@@ -1,8 +1,8 @@
-
 import { Search, Filter, Clock, Star, X } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import RecipeDetailModal from "@/components/RecipeDetailModal";
 
 const popularSearches = [
   "Salad giảm cân",
@@ -62,6 +62,8 @@ const SearchPage = () => {
   const [searchText, setSearchText] = useState("");
   const [showFilters, setShowFilters] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+  const [selectedRecipe, setSelectedRecipe] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSearch = () => {
     if (searchText.trim()) {
@@ -89,7 +91,13 @@ const SearchPage = () => {
 
   const viewRecipe = (recipe: any) => {
     console.log('Viewing recipe:', recipe);
-    alert(`Công thức: ${recipe.name}\n\nCalo: ${recipe.calories}\nThời gian: ${recipe.time}\nĐánh giá: ${recipe.rating}⭐\n\nChi tiết công thức sẽ được hiển thị tại đây...`);
+    setSelectedRecipe(recipe);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedRecipe(null);
   };
 
   return (
@@ -221,6 +229,13 @@ const SearchPage = () => {
           </div>
         </>
       )}
+
+      {/* Recipe Detail Modal */}
+      <RecipeDetailModal
+        recipe={selectedRecipe}
+        isOpen={isModalOpen}
+        onClose={closeModal}
+      />
     </div>
   );
 };
