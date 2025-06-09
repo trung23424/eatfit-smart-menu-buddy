@@ -17,22 +17,25 @@ const MobileFrame = ({ children, bottomNavigation }: MobileFrameProps) => {
             {/* Notch */}
             <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-36 h-6 bg-black rounded-b-2xl z-50"></div>
             
-            {/* Screen Content */}
-            <div className="w-full h-full overflow-y-auto pt-6" style={{ paddingBottom: bottomNavigation ? '80px' : '20px' }}>
-              {children}
-            </div>
-            
-            {/* Bottom Navigation - Fixed inside phone frame */}
-            {bottomNavigation && (
-              <div className="absolute bottom-0 left-0 right-0 z-50">
-                {bottomNavigation}
+            {/* Screen Content Container - This is where modals will be positioned relative to */}
+            <div className="w-full h-full relative">
+              {/* Main Content */}
+              <div className="w-full h-full overflow-y-auto pt-6" style={{ paddingBottom: bottomNavigation ? '80px' : '20px' }}>
+                {children}
               </div>
-            )}
-            
-            {/* Home Indicator - Only show if no bottom navigation */}
-            {!bottomNavigation && (
-              <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-black rounded-full opacity-60"></div>
-            )}
+              
+              {/* Bottom Navigation - Fixed inside phone frame */}
+              {bottomNavigation && (
+                <div className="absolute bottom-0 left-0 right-0 z-50">
+                  {bottomNavigation}
+                </div>
+              )}
+              
+              {/* Home Indicator - Only show if no bottom navigation */}
+              {!bottomNavigation && (
+                <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-black rounded-full opacity-60"></div>
+              )}
+            </div>
           </div>
         </div>
         

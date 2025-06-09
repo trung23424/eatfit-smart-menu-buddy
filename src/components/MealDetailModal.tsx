@@ -35,7 +35,7 @@ const MealDetailModal = ({ meal, isOpen, onClose, onToggleFavorite }: MealDetail
   ];
 
   return (
-    <div className="absolute inset-0 z-50 bg-black/50 flex items-end">
+    <div className="fixed inset-0 z-50 bg-black/50 flex items-end">
       <div className="w-full bg-white rounded-t-2xl max-h-[85%] overflow-hidden animate-slide-up">
         {/* Handle bar */}
         <div className="w-12 h-1 bg-gray-300 rounded-full mx-auto mt-2 mb-4"></div>
