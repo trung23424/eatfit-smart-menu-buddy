@@ -1,6 +1,6 @@
 
 import { Clock, Star, Flame, ChefHat, Heart, X } from "lucide-react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
@@ -42,19 +42,19 @@ const RecipeDetailModal = ({ recipe, isOpen, onClose }: RecipeDetailModalProps) 
   ];
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-md mx-auto max-h-[90vh] overflow-y-auto">
-        <DialogHeader className="relative">
+    <Drawer open={isOpen} onOpenChange={onClose}>
+      <DrawerContent className="max-h-[85vh]">
+        <DrawerHeader className="relative pb-2">
           <button
             onClick={onClose}
-            className="absolute right-0 top-0 p-1 rounded-full hover:bg-gray-100"
+            className="absolute right-4 top-4 p-1 rounded-full hover:bg-gray-100"
           >
             <X className="h-4 w-4" />
           </button>
-          <DialogTitle className="text-lg font-semibold pr-8">{recipe.name}</DialogTitle>
-        </DialogHeader>
+          <DrawerTitle className="text-lg font-semibold pr-8">{recipe.name}</DrawerTitle>
+        </DrawerHeader>
 
-        <div className="space-y-4">
+        <div className="px-4 pb-4 space-y-4 overflow-y-auto">
           {/* Recipe Image */}
           <div className="w-full h-48 bg-gray-200 rounded-lg overflow-hidden relative">
             <div className="w-full h-full bg-gradient-to-br from-green-100 to-green-200 flex items-center justify-center">
@@ -135,8 +135,8 @@ const RecipeDetailModal = ({ recipe, isOpen, onClose }: RecipeDetailModalProps) 
             </Button>
           </div>
         </div>
-      </DialogContent>
-    </Dialog>
+      </DrawerContent>
+    </Drawer>
   );
 };
 
