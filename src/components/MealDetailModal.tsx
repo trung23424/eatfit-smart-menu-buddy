@@ -1,6 +1,5 @@
 
 import { Clock, Star, Flame, ChefHat, Heart, X, Users, Target } from "lucide-react";
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -27,7 +26,7 @@ interface MealDetailModalProps {
 }
 
 const MealDetailModal = ({ meal, isOpen, onClose, onToggleFavorite }: MealDetailModalProps) => {
-  if (!meal) return null;
+  if (!meal || !isOpen) return null;
 
   const nutritionData = [
     { name: 'Protein', value: meal.nutrients.protein, color: 'bg-blue-500', percentage: 60 },
@@ -36,19 +35,24 @@ const MealDetailModal = ({ meal, isOpen, onClose, onToggleFavorite }: MealDetail
   ];
 
   return (
-    <Drawer open={isOpen} onOpenChange={onClose}>
-      <DrawerContent className="max-h-[85vh]">
-        <DrawerHeader className="relative pb-2">
+    <div className="absolute inset-0 z-50 bg-black/50 flex items-end">
+      <div className="w-full bg-white rounded-t-2xl max-h-[85%] overflow-hidden animate-slide-up">
+        {/* Handle bar */}
+        <div className="w-12 h-1 bg-gray-300 rounded-full mx-auto mt-2 mb-4"></div>
+        
+        {/* Header */}
+        <div className="relative px-4 pb-2">
           <button
             onClick={onClose}
-            className="absolute right-4 top-4 p-1 rounded-full hover:bg-gray-100"
+            className="absolute right-4 top-0 p-1 rounded-full hover:bg-gray-100"
           >
             <X className="h-4 w-4" />
           </button>
-          <DrawerTitle className="text-lg font-semibold pr-8">{meal.name}</DrawerTitle>
-        </DrawerHeader>
+          <h2 className="text-lg font-semibold pr-8">{meal.name}</h2>
+        </div>
 
-        <div className="px-4 pb-4 space-y-4 overflow-y-auto">
+        {/* Content */}
+        <div className="px-4 pb-4 space-y-4 overflow-y-auto max-h-[calc(85vh-80px)]">
           {/* Meal Image */}
           <div className="w-full h-48 bg-gray-200 rounded-lg overflow-hidden relative">
             <img 
@@ -153,8 +157,8 @@ const MealDetailModal = ({ meal, isOpen, onClose, onToggleFavorite }: MealDetail
             </Button>
           </div>
         </div>
-      </DrawerContent>
-    </Drawer>
+      </div>
+    </div>
   );
 };
 
