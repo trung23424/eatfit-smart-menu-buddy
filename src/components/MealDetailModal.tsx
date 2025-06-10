@@ -35,7 +35,7 @@ const MealDetailModal = ({ meal, isOpen, onClose, onToggleFavorite }: MealDetail
   ];
 
   return (
-    <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50">
+    <div className="absolute inset-0 bg-black/60 flex items-center justify-center p-4 z-40">
       <div className="bg-white rounded-xl w-full max-w-sm max-h-[600px] overflow-hidden shadow-2xl animate-scale-in">
         {/* Header */}
         <div className="relative px-4 py-3 border-b border-gray-100">
