@@ -35,21 +35,21 @@ const MealDetailModal = ({ meal, isOpen, onClose, onToggleFavorite }: MealDetail
   ];
 
   return (
-    <div className="absolute inset-0 bg-black/60 flex items-center justify-center p-4 z-40">
-      <div className="bg-white rounded-xl w-full max-w-sm max-h-[600px] overflow-hidden shadow-2xl animate-scale-in">
-        {/* Header */}
-        <div className="relative px-4 py-3 border-b border-gray-100">
-          <button
-            onClick={onClose}
-            className="absolute right-3 top-3 p-1 rounded-full hover:bg-gray-100 z-10"
-          >
-            <X className="h-5 w-5" />
-          </button>
-          <h2 className="text-lg font-semibold pr-8">{meal.name}</h2>
-        </div>
+    <div className="absolute inset-0 bg-black/60 z-40 overflow-y-auto">
+      <div className="min-h-full flex items-start justify-center p-4 pt-16">
+        <div className="bg-white rounded-xl w-full max-w-sm shadow-2xl animate-scale-in mb-16">
+          {/* Header */}
+          <div className="relative px-4 py-3 border-b border-gray-100">
+            <button
+              onClick={onClose}
+              className="absolute right-3 top-3 p-1 rounded-full hover:bg-gray-100 z-10"
+            >
+              <X className="h-5 w-5" />
+            </button>
+            <h2 className="text-lg font-semibold pr-8">{meal.name}</h2>
+          </div>
 
-        {/* Scrollable Content */}
-        <div className="overflow-y-auto max-h-[480px]">
+          {/* Content */}
           <div className="p-4 space-y-4">
             {/* Meal Image */}
             <div className="w-full h-40 bg-gray-200 rounded-lg overflow-hidden relative">
@@ -143,19 +143,19 @@ const MealDetailModal = ({ meal, isOpen, onClose, onToggleFavorite }: MealDetail
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Action Buttons */}
-        <div className="p-4 border-t border-gray-100 bg-white">
-          <div className="flex gap-3">
-            <Button className="flex-1 h-10">
-              <ChefHat className="h-4 w-4 mr-2" />
-              Xem công thức
-            </Button>
-            <Button variant="outline" className="flex-1 h-10">
-              <Users className="h-4 w-4 mr-2" />
-              Thêm vào lịch
-            </Button>
+          {/* Action Buttons */}
+          <div className="p-4 border-t border-gray-100 bg-white">
+            <div className="flex gap-3">
+              <Button className="flex-1 h-10">
+                <ChefHat className="h-4 w-4 mr-2" />
+                Xem công thức
+              </Button>
+              <Button variant="outline" className="flex-1 h-10">
+                <Users className="h-4 w-4 mr-2" />
+                Thêm vào lịch
+              </Button>
+            </div>
           </div>
         </div>
       </div>
