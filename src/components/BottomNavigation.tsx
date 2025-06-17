@@ -1,11 +1,11 @@
 
-import { Home, Search, Calendar, MessageSquare, User } from "lucide-react";
+import { Home, Search, Calendar, MessageSquare, User, BarChart3, BookOpen } from "lucide-react";
 
 const navItems = [
   { id: 'home', icon: Home, label: 'Trang chủ' },
   { id: 'search', icon: Search, label: 'Tìm kiếm' },
-  { id: 'calendar', icon: Calendar, label: 'Lịch trình' },
-  { id: 'community', icon: MessageSquare, label: 'Cộng đồng' },
+  { id: 'diary', icon: BookOpen, label: 'Nhật ký' },
+  { id: 'dashboard', icon: BarChart3, label: 'Tiến trình' },
   { id: 'profile', icon: User, label: 'Cá nhân' }
 ];
 

@@ -22,6 +22,10 @@ import SearchPage from "./SearchPage";
 import CalendarPage from "./CalendarPage";
 import CommunityPage from "./CommunityPage";
 import ProfilePage from "./ProfilePage";
+import DashboardPage from "./DashboardPage";
+import DiaryPage from "./DiaryPage";
+import RecipePage from "./RecipePage";
+import ChallengePage from "./ChallengePage";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('home');
@@ -36,6 +40,14 @@ const Index = () => {
         return <CommunityPage />;
       case 'profile':
         return <ProfilePage />;
+      case 'dashboard':
+        return <DashboardPage />;
+      case 'diary':
+        return <DiaryPage />;
+      case 'recipe':
+        return <RecipePage />;
+      case 'challenge':
+        return <ChallengePage />;
       default:
         return (
           <main className="animate-fade-in">
