@@ -42,6 +42,18 @@ const MealDetailModal = ({ meal, isOpen, onClose, onToggleFavorite }: MealDetail
     }
   }, [isOpen]);
 
+  const handleClose = () => {
+    console.log('Close button clicked!');
+    onClose();
+  };
+
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      console.log('Backdrop clicked!');
+      onClose();
+    }
+  };
+
   if (!meal || !isOpen) return null;
 
   const nutritionData = [
@@ -51,13 +63,17 @@ const MealDetailModal = ({ meal, isOpen, onClose, onToggleFavorite }: MealDetail
   ];
 
   return (
-    <div className="absolute inset-0 bg-black/60 z-40 flex items-center justify-center p-3">
+    <div 
+      className="absolute inset-0 bg-black/60 z-40 flex items-center justify-center p-3"
+      onClick={handleBackdropClick}
+    >
       <div className="bg-white rounded-xl w-full max-w-[300px] max-h-[85vh] shadow-2xl animate-scale-in overflow-hidden flex flex-col relative">
         {/* Header */}
         <div className="relative px-3 py-2 border-b border-gray-100 flex-shrink-0">
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="absolute right-2 top-2 p-1 rounded-full hover:bg-gray-100 z-10"
+            type="button"
           >
             <X className="h-4 w-4" />
           </button>
