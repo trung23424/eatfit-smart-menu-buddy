@@ -42,7 +42,6 @@ const MobileFrame = ({ children, bottomNavigation }: MobileFrameProps) => {
         {/* Side Buttons */}
         <div className="absolute -left-1 top-32 w-1 h-16 bg-gray-800 rounded-l"></div>
         <div className="absolute -left-1 top-52 w-1 h-12 bg-gray-800 rounded-l"></div>
-        <div className="absolute -left-1 top-68 w-1 h-12 bg-gray-800 rounded-l"></div>
         <div className="absolute -right-1 top-44 w-1 h-20 bg-gray-800 rounded-r"></div>
       </div>
     </div>
