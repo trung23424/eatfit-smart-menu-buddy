@@ -3,6 +3,7 @@ import { Clock, Star, Flame, ChefHat, Heart, X, Users, Target } from "lucide-rea
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import { useEffect, useState } from "react";
 
 interface Meal {
   id: number;
@@ -26,6 +27,21 @@ interface MealDetailModalProps {
 }
 
 const MealDetailModal = ({ meal, isOpen, onClose, onToggleFavorite }: MealDetailModalProps) => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = (e: Event) => {
+      const target = e.target as HTMLElement;
+      setIsScrolled(target.scrollTop > 150);
+    };
+
+    const scrollContainer = document.querySelector('.modal-scroll-container');
+    if (scrollContainer) {
+      scrollContainer.addEventListener('scroll', handleScroll);
+      return () => scrollContainer.removeEventListener('scroll', handleScroll);
+    }
+  }, [isOpen]);
+
   if (!meal || !isOpen) return null;
 
   const nutritionData = [
@@ -36,7 +52,7 @@ const MealDetailModal = ({ meal, isOpen, onClose, onToggleFavorite }: MealDetail
 
   return (
     <div className="absolute inset-0 bg-black/60 z-40 flex items-center justify-center p-3">
-      <div className="bg-white rounded-xl w-full max-w-[300px] max-h-[85vh] shadow-2xl animate-scale-in overflow-hidden flex flex-col">
+      <div className="bg-white rounded-xl w-full max-w-[300px] max-h-[85vh] shadow-2xl animate-scale-in overflow-hidden flex flex-col relative">
         {/* Header */}
         <div className="relative px-3 py-2 border-b border-gray-100 flex-shrink-0">
           <button
@@ -48,8 +64,19 @@ const MealDetailModal = ({ meal, isOpen, onClose, onToggleFavorite }: MealDetail
           <h2 className="text-base font-semibold pr-8">{meal.name}</h2>
         </div>
 
+        {/* Sticky Match Score Bar - Shows when scrolled */}
+        <div className={`absolute top-[52px] left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-gray-100 px-3 py-2 z-20 transition-all duration-300 ${
+          isScrolled ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'
+        }`}>
+          <div className="flex items-center justify-between mb-1">
+            <span className="text-xs font-medium">Độ phù hợp</span>
+            <span className="text-xs font-bold text-green-600">{meal.matchScore}%</span>
+          </div>
+          <Progress value={meal.matchScore} className="h-1" />
+        </div>
+
         {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto modal-scroll-container">
           <div className="p-3 space-y-3">
             {/* Meal Image */}
             <div className="w-full h-32 bg-gray-200 rounded-lg overflow-hidden relative">
@@ -124,7 +151,7 @@ const MealDetailModal = ({ meal, isOpen, onClose, onToggleFavorite }: MealDetail
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-1.5">
                       <div 
-                        className={`h-1.5 rounded-full ${nutrient.color}`}
+                        className={`h-1.5 rounded-full ${nutrient.color} transition-all duration-1000 ease-out`}
                         style={{ width: `${nutrient.percentage}%` }}
                       ></div>
                     </div>
@@ -142,6 +169,9 @@ const MealDetailModal = ({ meal, isOpen, onClose, onToggleFavorite }: MealDetail
                 <Badge variant="outline" className="text-xs">Cải thiện tiêu hóa</Badge>
               </div>
             </div>
+
+            {/* Add some bottom padding to ensure content is visible above action buttons */}
+            <div className="h-4"></div>
           </div>
         </div>
 
